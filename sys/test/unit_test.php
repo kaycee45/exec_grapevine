@@ -34,8 +34,6 @@ class Unit_test{
 		echo "<pre>";
 		print_r($this->block);
 		echo "</pre>";
-		
-		exit();
 	}
 }
 ?>

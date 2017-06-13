@@ -28,6 +28,5 @@ class Master extends mysqli{
 			header("Location:".$url);
 		}
 	}
-	
 }
 ?>
