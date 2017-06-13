@@ -15,12 +15,12 @@ class Master_test extends Unit_test{
 			$control = ucfirst($query['c']."_test");
 			$con = new $control();
 			
-			$this->assert( file_exists(APP_DIR."/controllers/".$query['c'].".php"), "Verify that the controller file exists");
+			$this->assert( file_exists(APP_DIR."/controllers/".$query['c'].".php"), "Verify that the controller ".$query['c']." exists");
 			$this->check_func(array($con, $query['m']), array(), true, "should render the function ".$query['m']."()");
 			$this->get_report();
 			
 			//Test the models
-			$this->model('m_default');
+			//$this->model('m_default');
 		}
 		else{
 			header("Location:".$url);
@@ -29,10 +29,16 @@ class Master_test extends Unit_test{
 	
 	public function model($model){
 		$this->innit('Test Models', 'Should properly render a model without problem');
-		$this->assert(file_exists(APP_DIR."/models/".$model.".php"), "Verify that the model file exists");
+		$this->assert(file_exists(APP_DIR."/models/".$model.".php"), "Verify that the model ".$model." exists");
 		
-		require(TEST_DIR."/models/".$model."_test.php");
-		$model = ucfirst($model."_test");
+		require(APP_DIR."/models/".$model.".php");
+		$model = ucfirst($model);
+		$mod = new $model();
+		
+		$this->check_func(array($mod, "mock_db"), array(), null, "should render the function mock_db()");
+		$args = array(null, null, null, null, $location="London", $sal="0-100000");
+		$this->check_func(array($mod, "search"), $args, null, "should render the function search()");
+			
 		$this->get_report();
 	}
 }

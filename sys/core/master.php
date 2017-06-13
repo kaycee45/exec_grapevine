@@ -28,5 +28,18 @@ class Master extends mysqli{
 			header("Location:".$url);
 		}
 	}
+	
+	public function model($model){
+		require(APP_DIR."/models/".$model.".php");
+		$model = ucfirst($model);
+		return new $model();
+	}
+	
+	public function view($view, $data){
+		foreach($data as $variable => $value){
+			$$variable = $value;
+		}
+		require(APP_DIR."/views/".$view.".php");
+	}
 }
 ?>
