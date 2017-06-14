@@ -36,7 +36,7 @@ class Master extends mysqli{
 	}
 	
 	public function view($view, $data){
-		if(count($data) > 0)
+		if(count($data) > 0){
 			foreach($data as $variable => $value){
 				$$variable = $value;
 			}
