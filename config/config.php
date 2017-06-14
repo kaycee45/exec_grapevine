@@ -2,13 +2,13 @@
 if(!defined('ROOT_DIR')) die("Access Denied");
 
 //root folder
-$config["root"] = "grapevine";
+$config["root"] = "exec_grapevine";
 
-//the index page (landing controller)
+//the default (landing) controller
 $config["index"] = "c_default";
 
-//development or production
-$config["general"]["environment"] = "test";
+//dev, test or prod
+$config["general"]["environment"] = "dev";
 
 //default Charset
 $config["general"]["charset"] = "UTF-8";
