@@ -36,8 +36,10 @@ class Master extends mysqli{
 	}
 	
 	public function view($view, $data){
-		foreach($data as $variable => $value){
-			$$variable = $value;
+		if(count($data) > 0)
+			foreach($data as $variable => $value){
+				$$variable = $value;
+			}
 		}
 		require(APP_DIR."/views/".$view.".php");
 	}

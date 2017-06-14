@@ -18,12 +18,14 @@ if(!isset($query['c']) || !file_exists(APP_DIR."/controllers/".$query['c'].".php
 }
 
 if(ENV == 'test'){
-	require_once(SYS_DIR."/test/master_test.php");
-	$master = new Master_test();
+	define("MASTER", SYS_DIR."/test/master_test.php");
+	require_once(MASTER);
+	$master = new Master();
 	$master->controller($query);
 }
 else{
-	require_once(SYS_DIR."/core/master.php");
+	define("MASTER", SYS_DIR."/core/master.php");
+	require_once(MASTER);
 	$master = new Master();
 	$master->controller($query);
 }

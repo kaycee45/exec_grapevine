@@ -1,6 +1,6 @@
 <?php
 
-require_once(SYS_DIR."/core/master.php");
+require_once(MASTER);
 
 class M_default extends Master{
 		
@@ -29,7 +29,7 @@ class M_default extends Master{
 		return $data;
 	}
 	
-	public function search($cid=null, $cname=null, $office=null, $area=null, $location=null, $sal="0-100000"){
+	public function search($cid=null, $cname=null, $office=null, $area=null, $location=null, $sal=null){
 		$data = array();	
 		$mock_db = $this->mock_db();
 		foreach($mock_db['consultant'] as $arr){
@@ -42,8 +42,9 @@ class M_default extends Master{
 			}
 			else{
 				$exp = explode('-', $sal);
-				$min = $exp[0]; $max = $exp[1];
-				$match = preg_match('/'.$cname.'/i', $arr['name']) ? true : false;
+				$min = isset($exp[0]) ? $exp[0] : 0; 
+				$max = isset($exp[1]) ? $exp[1] : 1000000; 
+				$match = (preg_match('/'.$cname.'/i', $arr['name']) == true) ? true : false;
 				if($cname && $sal){
 					if($match && ($arr['salary'] >= $min && $arr['salary'] <= $min)){
 						$_cons['name'] = $arr['name'];

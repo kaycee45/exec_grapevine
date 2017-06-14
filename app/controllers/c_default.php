@@ -1,6 +1,6 @@
 <?php
 
-require_once(SYS_DIR."/core/master.php");
+require_once(MASTER);
 
 class C_default extends Master{
 	

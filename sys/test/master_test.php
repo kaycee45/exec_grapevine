@@ -2,25 +2,23 @@
 
 require_once('unit_test.php');
 
-class Master_test extends Unit_test{
+class Master extends Unit_test{
 	
 	public $error;	
 	
 	public function controller($query){	
 		$this->innit('Test Controllers', 'Should properly render a controller without problem');
 		
-		$url = URL_BASE."?c=".$query['c']."_test&m=".$query['m']."&r=1";
+		$url = URL_BASE."?c=".$query['c']."&m=".$query['m']."&r=1";
 		if(isset($query['r'])){
-			require(TEST_DIR."/controllers/".$query['c']."_test.php");
-			$control = ucfirst($query['c']."_test");
+			require(APP_DIR."/controllers/".$query['c'].".php");
+			$control = ucfirst($query['c']);
 			$con = new $control();
 			
 			$this->assert( file_exists(APP_DIR."/controllers/".$query['c'].".php"), "Verify that the controller ".$query['c']." exists");
-			$this->check_func(array($con, $query['m']), array(), true, "should render the function ".$query['m']."()");
-			$this->get_report();
+			$this->check_func(array($con, $query['m']), array(), null, "should render the function ".$query['m']."()");
 			
-			//Test the models
-			//$this->model('m_default');
+			$this->get_report();
 		}
 		else{
 			header("Location:".$url);
@@ -40,6 +38,11 @@ class Master_test extends Unit_test{
 		$this->check_func(array($mod, "search"), $args, null, "should render the function search()");
 			
 		$this->get_report();
+	}
+	
+	public function view($view, $data=null){
+		$this->innit('Test Views', 'Should properly render a view without problem');
+		$this->assert(file_exists(APP_DIR."/views/".$view.".php"), "Verify that the model ".$view." exists");
 	}
 }
 ?>
