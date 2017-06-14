@@ -6,9 +6,9 @@ configurations
 
 Default setup
 ----------------
-Controller name => c_default
-Model name => m_default
-View name => v_default
+Controller name => c_default,
+Model name => m_default,
+View name => v_default,
 Root folder => exec_grapevine
 
 To run the script
@@ -21,6 +21,7 @@ Routing
 "//example.com/[root_folder]/?c=[controller]&m=[method]";
 
 FYI
+---
 No database was used as instructed, all data was stored in an array even tho a relational database will produce a more accurate result.
 
 
